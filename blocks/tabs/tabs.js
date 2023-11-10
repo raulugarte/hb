@@ -1,4 +1,4 @@
-import { loadBlocks } from '../../scripts/aem.js';
+import { loadBlocks } from '../../scripts/lib-franklin.js';
 import { decorateMain } from '../../scripts/scripts.js';
 
 async function generateTabMainBlock(html) {
@@ -117,9 +117,4 @@ export default async function decorate(block) {
       }, HASH_SCROLL_POLL_INTERVAL_DELAY_IN_MILLI_SECONDS);
     }
   }
-
-  /**
-   * fix bug in tabs block
-   */
-  block.parentElement.setAttribute('class', [...block.parentElement.classList].slice(0, 3).join(' '));
 }
