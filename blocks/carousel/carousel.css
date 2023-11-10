@@ -3,12 +3,26 @@ main .carousel-container {
 }
 
 main .carousel {
+
+  /* RUG */
+  /*
   display: flex;
   scroll-snap-type: x mandatory;
   overflow: scroll hidden;
   scroll-behavior: smooth;
   max-width: 1680px;
   margin: auto;
+  */
+
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow: scroll hidden;
+  scroll-behavior: smooth;
+  padding: 0px;
+  max-width: 100%;
+  margin: 0px;
+
+
 }
 
 main .carousel picture {
