@@ -69,6 +69,7 @@ function createPopupButton(label, header, items) {
   return button;
 }
 
+// eslint-disable-next-line no-unused-vars
 function createToggleButton(label) {
   const button = document.createElement('div');
   button.className = 'hlx-badge';
@@ -269,17 +270,17 @@ function populatePerformanceMetrics(div, config, {
 }
 
 /**
- * Create Badge if a Page is enlisted in a Helix Experiment
+ * Create Badge if a Page is enlisted in a AEM Experiment
  * @return {Object} returns a badge or empty string
  */
-async function decorateExperimentPill(overlay, options) {
+async function decorateExperimentPill(overlay, options, context) {
   const config = window?.hlx?.experiment;
-  const experiment = this.toClassName(this.getMetadata(options.experimentsMetaTag));
-  // eslint-disable-next-line no-console
-  console.log('preview experiment', experiment);
+  const experiment = context.toClassName(context.getMetadata(options.experimentsMetaTag));
   if (!experiment || !config) {
     return;
   }
+  // eslint-disable-next-line no-console
+  console.log('preview experiment', experiment);
 
   const pill = createPopupButton(
     `Experiment: ${config.id}`,
@@ -299,7 +300,7 @@ async function decorateExperimentPill(overlay, options) {
     },
     config.variantNames.map((vname) => createVariant(experiment, vname, config, options)),
   );
-  pill.classList.add(`is-${this.toClassName(config.status)}`);
+  pill.classList.add(`is-${context.toClassName(config.status)}`);
   overlay.append(pill);
 
   const performanceMetrics = await fetchRumData(experiment, options);
@@ -325,28 +326,28 @@ function createCampaign(campaign, isSelected, options) {
 }
 
 /**
- * Create Badge if a Page is enlisted in a Franklin Campign
+ * Create Badge if a Page is enlisted in a AEM Campaign
  * @return {Object} returns a badge or empty string
  */
-async function decorateCampaignPill(overlay, options) {
-  const campaigns = this.getAllMetadata(options.campaignsMetaTagPrefix);
+async function decorateCampaignPill(overlay, options, context) {
+  const campaigns = context.getAllMetadata(options.campaignsMetaTagPrefix);
   if (!Object.keys(campaigns).length) {
     return;
   }
 
   const usp = new URLSearchParams(window.location.search);
   const forcedAudience = usp.has(options.audiencesQueryParameter)
-    ? this.toClassName(usp.get(options.audiencesQueryParameter))
+    ? context.toClassName(usp.get(options.audiencesQueryParameter))
     : null;
-  const audiences = campaigns.audience.split(',').map(this.toClassName);
-  const resolvedAudiences = await this.getResolvedAudiences(audiences, options);
+  const audiences = campaigns.audience?.split(',').map(context.toClassName) || [];
+  const resolvedAudiences = await context.getResolvedAudiences(audiences, options);
   const isActive = forcedAudience
     ? audiences.includes(forcedAudience)
     : (!resolvedAudiences || !!resolvedAudiences.length);
   const campaign = (usp.has(options.campaignsQueryParameter)
-    ? this.toClassName(usp.get(options.campaignsQueryParameter))
+    ? context.toClassName(usp.get(options.campaignsQueryParameter))
     : null)
-    || (usp.has('utm_campaign') ? this.toClassName(usp.get('utm_campaign')) : null);
+    || (usp.has('utm_campaign') ? context.toClassName(usp.get('utm_campaign')) : null);
   const pill = createPopupButton(
     `Campaign: ${campaign || 'default'}`,
     {
@@ -362,7 +363,7 @@ async function decorateCampaignPill(overlay, options) {
       createCampaign('default', !campaign || !isActive, options),
       ...Object.keys(campaigns)
         .filter((c) => c !== 'audience')
-        .map((c) => createCampaign(c, isActive && this.toClassName(campaign) === c, options)),
+        .map((c) => createCampaign(c, isActive && context.toClassName(campaign) === c, options)),
     ],
   );
 
@@ -384,33 +385,34 @@ function createAudience(audience, isSelected, options) {
 }
 
 /**
- * Create Badge if a Page is enlisted in a Franklin Campign
+ * Create Badge if a Page is enlisted in a AEM Audiences
  * @return {Object} returns a badge or empty string
  */
-async function decorateAudiencesPill(overlay, options) {
-  const audiences = this.getAllMetadata(options.audiencesMetaTagPrefix);
+async function decorateAudiencesPill(overlay, options, context) {
+  const audiences = context.getAllMetadata(options.audiencesMetaTagPrefix);
   if (!Object.keys(audiences).length || !Object.keys(options.audiences).length) {
     return;
   }
 
-  const usp = new URLSearchParams(window.location.search);
-  const forcedAudience = usp.has(options.audiencesQueryParameter)
-    ? this.toClassName(usp.get(options.audiencesQueryParameter))
-    : null;
+  const resolvedAudiences = await context.getResolvedAudiences(
+    Object.keys(audiences),
+    options,
+    context,
+  );
   const pill = createPopupButton(
     'Audiences',
     {
       label: 'Audiences for this page:',
     },
     [
-      createAudience('default', !forcedAudience || forcedAudience === 'default', options),
+      createAudience('default', !resolvedAudiences.length || resolvedAudiences[0] === 'default', options),
       ...Object.keys(audiences)
         .filter((a) => a !== 'audience')
-        .map((a) => createAudience(a, forcedAudience === a, options)),
+        .map((a) => createAudience(a, resolvedAudiences && resolvedAudiences[0] === a, options)),
     ],
   );
 
-  if (forcedAudience) {
+  if (resolvedAudiences.length) {
     pill.classList.add('is-active');
   }
   overlay.append(pill);
@@ -420,13 +422,13 @@ async function decorateAudiencesPill(overlay, options) {
  * Decorates Preview mode badges and overlays
  * @return {Object} returns a badge or empty string
  */
-export default async function decoratePreviewMode(options) {
+export default async function decoratePreviewMode(document, options, context) {
   try {
-    this.loadCSS(`${window.hlx.codeBasePath}/plugins/experience-decisioning/src/preview.css`);
+    context.loadCSS(`${options.basePath || window.hlx.codeBasePath}/plugins/experience-decisioning/src/preview.css`);
     const overlay = getOverlay(options);
-    await decorateAudiencesPill.call(this, overlay, options);
-    await decorateCampaignPill.call(this, overlay, options);
-    await decorateExperimentPill.call(this, overlay, options);
+    await decorateAudiencesPill(overlay, options, context);
+    await decorateCampaignPill(overlay, options, context);
+    await decorateExperimentPill(overlay, options, context);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(e);
