@@ -10,8 +10,21 @@
 .cards > ul > li {
     /* RUG */
     /* border: 1px solid var(--highlight-background-color); */
-    
+
     background-color: var(--background-color)
+}
+
+/* RUG */
+.cards p
+{
+  color: red;
+}
+
+.text
+{
+
+    color: aqua;
+
 }
 
 .cards .cards-card-body {
