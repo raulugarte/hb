@@ -83,8 +83,12 @@ main {
 
 h1, h2, h3,
 h4, h5, h6 {
-  font-family: var(--heading-font-family);
+  /* RUG */
+  /* font-family: var(--heading-font-family); 
   font-weight: 400;
+  */
+  font-family: AvertaPE, sans-serif;
+  font-weight: 800;
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;

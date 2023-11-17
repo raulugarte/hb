@@ -54,8 +54,15 @@ main .carousel > div {
 
 main .carousel div.carousel-text {
   max-width: 1200px;
-  margin: 0 auto;
-  background-color: white;
+  
+  /* RUG */
+  color: white;
+  text-align: right;
+  /* background-color: white; 
+  margin: 0 auto; */
+  margin-bottom: 100px;
+  margin-left: 800px;
+  margin-right: 400px;
   min-height: 188px;
   padding: 0 28px;
 }
@@ -63,6 +70,10 @@ main .carousel div.carousel-text {
 main .carousel div.carousel-text p {
   margin: 10px 0 16px;
   line-height: 1.2;
+
+  /* RUG */
+  font-size: 3rem;
+
 }
 
 main .carousel div.carousel-text h2 {
@@ -72,6 +83,9 @@ main .carousel div.carousel-text h2 {
 
 main .carousel div.carousel-text .button {
   margin: 0;
+  
+  /* RUG */
+  background-color: white;
 }
   
 
@@ -95,11 +109,18 @@ main .carousel-wrapper .carousel-buttons {
 
 main .carousel-buttons button {
   display: block;
+
+  /* RUG */
+  /* 
   height: 10px;
-  width: 10px;
+  width: 10px; 
+  border-radius: 5px;
+  */
+  height: 1px;
+  width: 50px;
   padding: 0;
   margin: 5px;
-  border-radius: 5px;
+  
   background-color: var(--highlight-background-color);
 }
 
