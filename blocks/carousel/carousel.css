@@ -30,7 +30,10 @@ main .carousel picture {
   z-index: -1;
   top: 0;
   left: 0;
-  bottom: 0;
+  /* RUG */
+  /*
+  bottom: 0; */
+  bottom: auto;
   right: 0;
   box-sizing: border-box;
 }
