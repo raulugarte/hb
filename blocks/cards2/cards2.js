@@ -1,4 +1,4 @@
 
-export default function decorate() {
+export default function decorate(block) {
 
 }
