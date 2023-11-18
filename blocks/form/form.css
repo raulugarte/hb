@@ -2,7 +2,9 @@
     --background-color-primary: #fff;
     --label-color: #666;
     --border-color: #818a91;
-    --button-primary-color: var(--color-yellow);
+    /* RUG */
+    /* --button-primary-color: var(--color-yellow); */
+    --button-primary-color: #000;
     --button-primary-hover-color: var(--color-yellow);
     --form-font-size-m: 22px;
     --form-font-size-s: 18px;
@@ -192,7 +194,9 @@ input::file-selector-button {
 }
 
 main .form button {
-    color: var(--form-button-color);
+    /* RUG */ 
+    /* color: var(--form-button-color); */
+    color: white;
     background: var(--form-button-background-color);
     border: var(--form-button-border);
     padding: var(--form-button-padding);

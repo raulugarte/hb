@@ -23,3 +23,11 @@
         margin-left: unset;
     }
 }
+
+.columns .button
+{
+
+    background-color: blue;
+    border: 5px;
+
+}
