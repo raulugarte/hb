@@ -17,7 +17,8 @@
 /* RUG */
 .cards p
 {
-  color: red;
+  color: rgb(13, 255, 0);
+
 }
 
 .cards .cards-card-body {

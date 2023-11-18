@@ -49,3 +49,26 @@
 .teaser h2 a {
     color: #202020
 }
+
+/* RUG */
+.teaser p {
+    /* font-family: var(--body-font-family); */
+    font-family: AvertaPE, sans-serif;
+    margin: .5em 0;
+    
+}
+
+.teaser a
+{
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 900!important;
+}
+
+.teaser a.button
+{
+
+    background-color: #000;
+    color: #fff;
+
+}
