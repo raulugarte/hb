@@ -20,7 +20,9 @@
   --highlight-background-color: #ccc;
   --text-color: #202020;
   --text-color-light: #ebebeb;
-  --heading-highlight-color: #ffea00;
+  /* RUG */
+  /* --heading-highlight-color: #ffea00; */
+  --heading-highlight-color: #000;
   --overlay-text-color: var(--text-color);
   --highlight-text-color: var(--text-color);
 
