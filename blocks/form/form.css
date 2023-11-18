@@ -5,7 +5,8 @@
     /* RUG */
     /* --button-primary-color: var(--color-yellow); */
     --button-primary-color: #000;
-    --button-primary-hover-color: var(--color-yellow);
+    /* --button-primary-hover-color: var(--color-yellow); */
+    --button-primary-hover-color: grey;
     --form-font-size-m: 22px;
     --form-font-size-s: 18px;
     --form-font-size-xs: 16px;
