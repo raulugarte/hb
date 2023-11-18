@@ -17,12 +17,16 @@
 /* RUG */
 .cards p
 {
-  color: rgb(13, 255, 0);
+    color: black;
+    /* padding: 5px; */
 
 }
 
 .cards .cards-card-body {
     margin: 16px;
+    /* RUG */
+    border: lightgray;
+    border-style: solid;
 }
 
 .cards .cards-card-image {
