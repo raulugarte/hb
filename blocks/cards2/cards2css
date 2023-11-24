@@ -7,6 +7,8 @@
     grid-gap: 16px;
   }
   
+
+
   .cards2 > ul > li {
     border: 1px solid var(--highlight-background-color);
     background-color: var(--background-color)
@@ -25,7 +27,9 @@
   }
   
   .cards2 > ul > li img {
+    list-style: none;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
   }
+
