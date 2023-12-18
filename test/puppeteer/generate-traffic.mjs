@@ -7,7 +7,8 @@ import puppeteer from 'puppeteer';
  * ITERATIONS can also be specified as an environment variable. Defaults to 10.
  */
 
-const WKND_URL = process.env.WKND_URL;
+//const WKND_URL = process.env.WKND_URL; 
+https://main--hb--raulugarte.hlx.live npm run generate-traffic
 const ITERATIONS = parseInt(process.env.ITERATIONS) || 10;
 
 if (!WKND_URL) {
